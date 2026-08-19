@@ -1,0 +1,11 @@
+1. Profile page 
+- phone icon not centerd
+- edit password button has a black border
+
+2. Quizz
+- written expression icon not centered
+
+3. Page numbering 
+- videos by topic - the non seelected pages numbers are just plain numbers without the circle
+
+4. My vocabulary list page - the Icons are out of place and larger than on preprod
