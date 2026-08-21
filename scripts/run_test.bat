@@ -5,7 +5,9 @@ REM ==============================
 REM JMeter JVM Memory Configuration
 REM ==============================
 
+set SCRIPT=script.jmx
 set HEAP=-Xms2g -Xmx4g -XX:MaxMetaspaceSize=256m
+set RESULTS_DIR=results
 
 set HOST=172.22.4.19
 set PORT=80
@@ -21,7 +23,7 @@ set WAIT_TIME_SHORT=1000
 set WAIT_TIME_MID=3000
 set WAIT_TIME_LONG=5000
 
-set RESULTS_DIR=results
+
 
 if not exist "%RESULTS_DIR%" mkdir "%RESULTS_DIR%"
 
@@ -32,7 +34,7 @@ set TIMESTAMP=%DATE%_%TIME%
 
 jmeter ^
     -n ^
-    -t final_script.jmx ^
+    -t %SCRIPT% ^
     -JHOST=%HOST% ^
     -JPORT=%PORT% ^
     -JPROTOCOL=%PROTOCOL% ^

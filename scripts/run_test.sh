@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# JMeter JVM memory
+export HEAP="-Xms2g -Xmx4g -XX:MaxMetaspaceSize=256m"
+
+SCRIPT=script.jmx
+RESULTS_DIR=results
+
 HOST=172.22.4.19
 PORT=80
 PROTOCOL=http
@@ -14,11 +20,7 @@ WAIT_TIME_SHORT=1000
 WAIT_TIME_MID=3000
 WAIT_TIME_LONG=5000
 
-RESULTS_DIR=results
 
-
-# JMeter JVM memory
-export HEAP="-Xms2g -Xmx4g -XX:MaxMetaspaceSize=256m"
 
 mkdir -p "$RESULTS_DIR"
 
@@ -26,7 +28,7 @@ TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
 
 jmeter \
 -n \
--t final_script.jmx \
+-t $SCRIPT \
 -JHOST=$HOST \
 -JPORT=$PORT \
 -JPROTOCOL=$PROTOCOL \
