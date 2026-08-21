@@ -51,12 +51,12 @@
           </elementProp>
           <elementProp name="THREADS" elementType="Argument">
             <stringProp name="Argument.name">THREADS</stringProp>
-            <stringProp name="Argument.value">${__P(THREADS,1)}</stringProp>
+            <stringProp name="Argument.value">${__P(THREADS,10)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="RAMP_UP" elementType="Argument">
             <stringProp name="Argument.name">RAMP_UP</stringProp>
-            <stringProp name="Argument.value">${__P(RAMP_UP,1)}</stringProp>
+            <stringProp name="Argument.value">${__P(RAMP_UP,60)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="DURATION" elementType="Argument">
@@ -68,18 +68,20 @@
       </elementProp>
     </TestPlan>
     <hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group - Guest">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group - Guest" enabled="false">
         <stringProp name="ThreadGroup.num_threads">${THREADS}</stringProp>
         <stringProp name="ThreadGroup.ramp_time">${RAMP_UP}</stringProp>
+        <longProp name="ThreadGroup.duration">1200</longProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">false</boolProp>
+        <boolProp name="ThreadGroup.scheduler">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <intProp name="LoopController.loops">-1</intProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="JSR223 Sampler - Search terms script" enabled="true">
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="JSR223 Sampler - Search terms script">
           <stringProp name="scriptLanguage">groovy</stringProp>
           <stringProp name="parameters"></stringProp>
           <stringProp name="filename"></stringProp>
@@ -119,7 +121,7 @@ vars.put(
 )</stringProp>
         </JSR223Sampler>
         <hashTree/>
-        <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+        <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager">
           <collectionProp name="HeaderManager.headers">
             <elementProp name="" elementType="Header">
               <stringProp name="Header.name">Accept</stringProp>
@@ -169,7 +171,7 @@ vars.put(
           <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
         </ConfigTestElement>
         <hashTree/>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[GET] Homepage">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[GET] Homepage" enabled="true">
           <stringProp name="HTTPSampler.path">/</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -238,7 +240,7 @@ vars.put(
           </HtmlExtractor>
           <hashTree/>
         </hashTree>
-        <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time - Medium">
+        <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time - Medium" enabled="true">
           <intProp name="ActionProcessor.action">1</intProp>
           <intProp name="ActionProcessor.target">0</intProp>
           <stringProp name="ActionProcessor.duration">0</stringProp>
@@ -250,7 +252,7 @@ vars.put(
           </UniformRandomTimer>
           <hashTree/>
         </hashTree>
-        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="Throughput Controller - Browse">
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="Throughput Controller - Browse" enabled="true">
           <intProp name="ThroughputController.style">1</intProp>
           <boolProp name="ThroughputController.perThread">false</boolProp>
           <intProp name="ThroughputController.maxThroughput">1</intProp>
@@ -261,7 +263,7 @@ vars.put(
           </FloatProperty>
         </ThroughputController>
         <hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[GET] Select Category - ${category}">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[GET] Select Category - ${category}" enabled="true">
             <stringProp name="HTTPSampler.path">${category}</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -289,7 +291,7 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
             </JSR223PreProcessor>
             <hashTree/>
           </hashTree>
-          <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time - Short">
+          <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time - Short" enabled="true">
             <intProp name="ActionProcessor.action">1</intProp>
             <intProp name="ActionProcessor.target">0</intProp>
             <stringProp name="ActionProcessor.duration">0</stringProp>
@@ -336,7 +338,7 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
             </RegexExtractor>
             <hashTree/>
           </hashTree>
-          <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time - Medium">
+          <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time - Medium" enabled="true">
             <intProp name="ActionProcessor.action">1</intProp>
             <intProp name="ActionProcessor.target">0</intProp>
             <stringProp name="ActionProcessor.duration">0</stringProp>
@@ -348,7 +350,7 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
             </UniformRandomTimer>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[GET] Random product">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[GET] Random product" enabled="true">
             <stringProp name="HTTPSampler.path">${product}</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -390,7 +392,7 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
             </HtmlExtractor>
             <hashTree/>
           </hashTree>
-          <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time - Medium">
+          <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time - Medium" enabled="true">
             <intProp name="ActionProcessor.action">1</intProp>
             <intProp name="ActionProcessor.target">0</intProp>
             <stringProp name="ActionProcessor.duration">0</stringProp>
@@ -403,7 +405,7 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
             <hashTree/>
           </hashTree>
         </hashTree>
-        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="Throughput Controller - Search">
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="Throughput Controller - Search" enabled="true">
           <intProp name="ThroughputController.style">1</intProp>
           <boolProp name="ThroughputController.perThread">false</boolProp>
           <intProp name="ThroughputController.maxThroughput">1</intProp>
@@ -414,7 +416,7 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
           </FloatProperty>
         </ThroughputController>
         <hashTree>
-          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Search by term">
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Search by term" enabled="true">
             <boolProp name="TransactionController.includeTimers">false</boolProp>
           </TransactionController>
           <hashTree>
@@ -654,7 +656,7 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
             <hashTree/>
           </hashTree>
         </hashTree>
-        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="Throughput Controller - Add to cart">
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="Throughput Controller - Add to cart" enabled="true">
           <intProp name="ThroughputController.style">1</intProp>
           <boolProp name="ThroughputController.perThread">false</boolProp>
           <intProp name="ThroughputController.maxThroughput">1</intProp>
@@ -665,11 +667,11 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
           </FloatProperty>
         </ThroughputController>
         <hashTree>
-          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Browse product">
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Browse product" enabled="true">
             <boolProp name="TransactionController.includeTimers">false</boolProp>
           </TransactionController>
           <hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[GET] Select Category - ${category}">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[GET] Select Category - ${category}" enabled="true">
               <stringProp name="HTTPSampler.path">/${category}</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -697,7 +699,7 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
               </JSR223PreProcessor>
               <hashTree/>
             </hashTree>
-            <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time - Short">
+            <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time - Short" enabled="true">
               <intProp name="ActionProcessor.action">1</intProp>
               <intProp name="ActionProcessor.target">0</intProp>
               <stringProp name="ActionProcessor.duration">0</stringProp>
@@ -709,7 +711,7 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
               </UniformRandomTimer>
               <hashTree/>
             </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[GET] Select Sub-Category - ${subCategory}">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[GET] Select Sub-Category - ${subCategory}" enabled="true">
               <stringProp name="HTTPSampler.path">/${subCategory}</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -744,7 +746,7 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
               </RegexExtractor>
               <hashTree/>
             </hashTree>
-            <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time - Medium">
+            <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time - Medium" enabled="true">
               <intProp name="ActionProcessor.action">1</intProp>
               <intProp name="ActionProcessor.target">0</intProp>
               <stringProp name="ActionProcessor.duration">0</stringProp>
@@ -756,7 +758,7 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
               </UniformRandomTimer>
               <hashTree/>
             </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[GET] Random product">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[GET] Random product" enabled="true">
               <stringProp name="HTTPSampler.path">${product}</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -811,11 +813,11 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
             </UniformRandomTimer>
             <hashTree/>
           </hashTree>
-          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Add to cart">
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Add to cart" enabled="true">
             <boolProp name="TransactionController.includeTimers">false</boolProp>
           </TransactionController>
           <hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[POST] Add product to cart">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[POST] Add product to cart" enabled="true">
               <stringProp name="HTTPSampler.path">${LANG}/cart</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -903,7 +905,7 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
               </HeaderManager>
               <hashTree/>
             </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[POST] Ajax Add to cart">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[POST] Ajax Add to cart" enabled="true">
               <stringProp name="HTTPSampler.path">${LANG}/module/ps_shoppingcart/ajax</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -954,7 +956,7 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
               <hashTree/>
             </hashTree>
           </hashTree>
-          <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time - Short">
+          <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time - Short" enabled="true">
             <intProp name="ActionProcessor.action">1</intProp>
             <intProp name="ActionProcessor.target">0</intProp>
             <stringProp name="ActionProcessor.duration">0</stringProp>
@@ -966,7 +968,7 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
             </UniformRandomTimer>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[GET] View cart">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[GET] View cart" enabled="true">
             <stringProp name="HTTPSampler.path">${LANG}/cart?action=show</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -978,7 +980,7 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
           </HTTPSamplerProxy>
           <hashTree/>
         </hashTree>
-        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler">
+        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="true">
           <boolProp name="displayJMeterProperties">false</boolProp>
           <boolProp name="displayJMeterVariables">true</boolProp>
           <boolProp name="displaySystemProperties">false</boolProp>
@@ -1095,7 +1097,7 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
           <stringProp name="filename"></stringProp>
         </ResultCollector>
         <hashTree/>
-        <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report">
+        <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
             <name>saveConfig</name>
@@ -1136,10 +1138,12 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group  - Login">
         <stringProp name="ThreadGroup.num_threads">${THREADS}</stringProp>
         <stringProp name="ThreadGroup.ramp_time">${RAMP_UP}</stringProp>
+        <longProp name="ThreadGroup.duration">1200</longProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">false</boolProp>
+        <boolProp name="ThreadGroup.scheduler">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <intProp name="LoopController.loops">-1</intProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
@@ -1310,7 +1314,7 @@ vars.put(
           </UniformRandomTimer>
           <hashTree/>
         </hashTree>
-        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Login Action">
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Login Action" enabled="true">
           <boolProp name="TransactionController.parent">true</boolProp>
           <boolProp name="TransactionController.includeTimers">false</boolProp>
         </TransactionController>
@@ -1338,7 +1342,7 @@ vars.put(
             </UniformRandomTimer>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[POST] Login">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[POST] Login" enabled="true">
             <stringProp name="HTTPSampler.path">${LANG}/login</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -1451,7 +1455,7 @@ vars.put(
             <hashTree/>
           </hashTree>
         </hashTree>
-        <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time - Medium">
+        <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time - Medium" enabled="true">
           <intProp name="ActionProcessor.action">1</intProp>
           <intProp name="ActionProcessor.target">0</intProp>
           <stringProp name="ActionProcessor.duration">0</stringProp>
@@ -1463,7 +1467,7 @@ vars.put(
           </UniformRandomTimer>
           <hashTree/>
         </hashTree>
-        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="Throughput Controller - Browse">
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="Throughput Controller - Browse" enabled="true">
           <intProp name="ThroughputController.style">1</intProp>
           <boolProp name="ThroughputController.perThread">false</boolProp>
           <intProp name="ThroughputController.maxThroughput">1</intProp>
@@ -1616,7 +1620,7 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
             <hashTree/>
           </hashTree>
         </hashTree>
-        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="Throughput Controller - Search">
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="Throughput Controller - Search" enabled="true">
           <intProp name="ThroughputController.style">1</intProp>
           <boolProp name="ThroughputController.perThread">false</boolProp>
           <intProp name="ThroughputController.maxThroughput">1</intProp>
@@ -1627,7 +1631,7 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
           </FloatProperty>
         </ThroughputController>
         <hashTree>
-          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Search by term">
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Search by term" enabled="true">
             <boolProp name="TransactionController.includeTimers">false</boolProp>
           </TransactionController>
           <hashTree>
@@ -1843,7 +1847,7 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
               <hashTree/>
             </hashTree>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[GET] Open Product - Search result">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[GET] Open Product - Search result" enabled="true">
             <stringProp name="HTTPSampler.path">${search_result_product}</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -1867,7 +1871,7 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
             <hashTree/>
           </hashTree>
         </hashTree>
-        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="Throughput Controller - Add to cart">
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="Throughput Controller - Add to cart" enabled="true">
           <intProp name="ThroughputController.style">1</intProp>
           <boolProp name="ThroughputController.perThread">false</boolProp>
           <intProp name="ThroughputController.maxThroughput">1</intProp>
@@ -1878,11 +1882,11 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
           </FloatProperty>
         </ThroughputController>
         <hashTree>
-          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Browse product">
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Browse product" enabled="true">
             <boolProp name="TransactionController.includeTimers">false</boolProp>
           </TransactionController>
           <hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[GET] Select Category - ${category}">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[GET] Select Category - ${category}" enabled="true">
               <stringProp name="HTTPSampler.path">/${category}</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -1969,7 +1973,7 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
               </UniformRandomTimer>
               <hashTree/>
             </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[GET] Random product">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[GET] Random product" enabled="true">
               <stringProp name="HTTPSampler.path">${product}</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -2024,11 +2028,11 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
             </UniformRandomTimer>
             <hashTree/>
           </hashTree>
-          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Add to cart">
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Add to cart" enabled="true">
             <boolProp name="TransactionController.includeTimers">false</boolProp>
           </TransactionController>
           <hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[POST] Add product to cart">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[POST] Add product to cart" enabled="true">
               <stringProp name="HTTPSampler.path">${LANG}/cart</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -2116,7 +2120,7 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
               </HeaderManager>
               <hashTree/>
             </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[POST] Ajax Add to cart">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[POST] Ajax Add to cart" enabled="true">
               <stringProp name="HTTPSampler.path">${LANG}/module/ps_shoppingcart/ajax</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -2167,7 +2171,7 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
               <hashTree/>
             </hashTree>
           </hashTree>
-          <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time - Short">
+          <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time - Short" enabled="true">
             <intProp name="ActionProcessor.action">1</intProp>
             <intProp name="ActionProcessor.target">0</intProp>
             <stringProp name="ActionProcessor.duration">0</stringProp>
@@ -2179,7 +2183,7 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
             </UniformRandomTimer>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[GET] View cart">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[GET] View cart" enabled="true">
             <stringProp name="HTTPSampler.path">${LANG}/cart?action=show</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -2191,7 +2195,7 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
           </HTTPSamplerProxy>
           <hashTree/>
         </hashTree>
-        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="Throughput Controller - Update cart">
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="Throughput Controller - Update cart" enabled="true">
           <intProp name="ThroughputController.style">1</intProp>
           <boolProp name="ThroughputController.perThread">false</boolProp>
           <intProp name="ThroughputController.maxThroughput">1</intProp>
@@ -2202,11 +2206,11 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
           </FloatProperty>
         </ThroughputController>
         <hashTree>
-          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Browse products">
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Browse products" enabled="true">
             <boolProp name="TransactionController.includeTimers">false</boolProp>
           </TransactionController>
           <hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[GET] Select Category - ${category}">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[GET] Select Category - ${category}" enabled="true">
               <stringProp name="HTTPSampler.path">/${category}</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -2234,7 +2238,7 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
               </JSR223PreProcessor>
               <hashTree/>
             </hashTree>
-            <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time - Short">
+            <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time - Short" enabled="true">
               <intProp name="ActionProcessor.action">1</intProp>
               <intProp name="ActionProcessor.target">0</intProp>
               <stringProp name="ActionProcessor.duration">0</stringProp>
@@ -2293,7 +2297,7 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
               </UniformRandomTimer>
               <hashTree/>
             </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[GET] Random product">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[GET] Random product" enabled="true">
               <stringProp name="HTTPSampler.path">${product}</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -2336,7 +2340,7 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
               <hashTree/>
             </hashTree>
           </hashTree>
-          <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time - Medium">
+          <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time - Medium" enabled="true">
             <intProp name="ActionProcessor.action">1</intProp>
             <intProp name="ActionProcessor.target">0</intProp>
             <stringProp name="ActionProcessor.duration">0</stringProp>
@@ -2348,11 +2352,11 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
             </UniformRandomTimer>
             <hashTree/>
           </hashTree>
-          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Add to cart">
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Add to cart" enabled="true">
             <boolProp name="TransactionController.includeTimers">false</boolProp>
           </TransactionController>
           <hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[POST] Add product to cart">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[POST] Add product to cart" enabled="true">
               <stringProp name="HTTPSampler.path">${LANG}/cart</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -2440,7 +2444,7 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
               </HeaderManager>
               <hashTree/>
             </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[POST] Ajax Add to cart">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[POST] Ajax Add to cart" enabled="true">
               <stringProp name="HTTPSampler.path">${LANG}/module/ps_shoppingcart/ajax</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -2491,7 +2495,7 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
               <hashTree/>
             </hashTree>
           </hashTree>
-          <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time - Short">
+          <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time - Short" enabled="true">
             <intProp name="ActionProcessor.action">1</intProp>
             <intProp name="ActionProcessor.target">0</intProp>
             <stringProp name="ActionProcessor.duration">0</stringProp>
@@ -2503,7 +2507,7 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
             </UniformRandomTimer>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[GET] View cart">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[GET] View cart" enabled="true">
             <stringProp name="HTTPSampler.path">${LANG}/cart?action=show</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -2514,7 +2518,7 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
             </elementProp>
           </HTTPSamplerProxy>
           <hashTree/>
-          <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time - Medium">
+          <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time - Medium" enabled="true">
             <intProp name="ActionProcessor.action">1</intProp>
             <intProp name="ActionProcessor.target">0</intProp>
             <stringProp name="ActionProcessor.duration">0</stringProp>
@@ -2526,7 +2530,7 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
             </UniformRandomTimer>
             <hashTree/>
           </hashTree>
-          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Update cart">
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Update cart" enabled="true">
             <boolProp name="TransactionController.includeTimers">false</boolProp>
           </TransactionController>
           <hashTree>
@@ -2613,7 +2617,7 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
               <hashTree/>
             </hashTree>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[GET] View cart">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[GET] View cart" enabled="true">
             <stringProp name="HTTPSampler.path">${LANG}/cart?action=show</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -2625,7 +2629,7 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
           </HTTPSamplerProxy>
           <hashTree/>
         </hashTree>
-        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree">
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
             <name>saveConfig</name>
@@ -2811,7 +2815,7 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
         <stringProp name="filename"></stringProp>
       </ResultCollector>
       <hashTree/>
-      <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
+      <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report">
         <boolProp name="ResultCollector.error_logging">false</boolProp>
         <objProp>
           <name>saveConfig</name>
@@ -2848,7 +2852,7 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
         <stringProp name="filename"></stringProp>
       </ResultCollector>
       <hashTree/>
-      <ResultCollector guiclass="TableVisualizer" testclass="ResultCollector" testname="View Results in Table" enabled="true">
+      <ResultCollector guiclass="TableVisualizer" testclass="ResultCollector" testname="View Results in Table">
         <boolProp name="ResultCollector.error_logging">false</boolProp>
         <objProp>
           <name>saveConfig</name>
@@ -2885,7 +2889,7 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
         <stringProp name="filename"></stringProp>
       </ResultCollector>
       <hashTree/>
-      <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="true">
+      <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report">
         <boolProp name="ResultCollector.error_logging">false</boolProp>
         <objProp>
           <name>saveConfig</name>
@@ -2922,7 +2926,7 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
         <stringProp name="filename"></stringProp>
       </ResultCollector>
       <hashTree/>
-      <ResultCollector guiclass="SimpleDataWriter" testclass="ResultCollector" testname="Simple Data Writer" enabled="true">
+      <ResultCollector guiclass="SimpleDataWriter" testclass="ResultCollector" testname="Simple Data Writer">
         <boolProp name="ResultCollector.error_logging">false</boolProp>
         <objProp>
           <name>saveConfig</name>
@@ -2956,12 +2960,12 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
             <connectTime>true</connectTime>
           </value>
         </objProp>
-        <stringProp name="filename"></stringProp>
+        <stringProp name="filename">results/test-results.jtl</stringProp>
       </ResultCollector>
       <hashTree/>
       <TestFragmentController guiclass="TestFragmentControllerGui" testclass="TestFragmentController" testname="Test Fragment - Browse " enabled="false"/>
       <hashTree>
-        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Transaction Controller - Browse">
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Transaction Controller - Browse" enabled="true">
           <boolProp name="TransactionController.includeTimers">false</boolProp>
         </TransactionController>
         <hashTree>
@@ -3046,7 +3050,7 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
             </UniformRandomTimer>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[GET] Select Category - ${category}">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[GET] Select Category - ${category}" enabled="true">
             <stringProp name="HTTPSampler.path">${category}</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -3175,7 +3179,7 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
             </HtmlExtractor>
             <hashTree/>
           </hashTree>
-          <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time - Medium">
+          <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time - Medium" enabled="true">
             <intProp name="ActionProcessor.action">1</intProp>
             <intProp name="ActionProcessor.target">0</intProp>
             <stringProp name="ActionProcessor.duration">0</stringProp>
@@ -3218,7 +3222,7 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
             </UniformRandomTimer>
             <hashTree/>
           </hashTree>
-          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Search by term">
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Search by term" enabled="true">
             <boolProp name="TransactionController.includeTimers">false</boolProp>
           </TransactionController>
           <hashTree>
@@ -3434,7 +3438,7 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
               <hashTree/>
             </hashTree>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[GET] Open Product - Search result">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[GET] Open Product - Search result" enabled="true">
             <stringProp name="HTTPSampler.path">${search_result_product}</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -3445,7 +3449,7 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
             </elementProp>
           </HTTPSamplerProxy>
           <hashTree/>
-          <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time - Medium">
+          <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time - Medium" enabled="true">
             <intProp name="ActionProcessor.action">1</intProp>
             <intProp name="ActionProcessor.target">0</intProp>
             <stringProp name="ActionProcessor.duration">0</stringProp>
@@ -3546,7 +3550,7 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
             </UniformRandomTimer>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[GET] Select Category - ${category}">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[GET] Select Category - ${category}" enabled="true">
             <stringProp name="HTTPSampler.path">/${category}</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -3825,7 +3829,7 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
             </HeaderManager>
             <hashTree/>
           </hashTree>
-          <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time - Short">
+          <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time - Short" enabled="true">
             <intProp name="ActionProcessor.action">1</intProp>
             <intProp name="ActionProcessor.target">0</intProp>
             <stringProp name="ActionProcessor.duration">0</stringProp>
@@ -3841,7 +3845,7 @@ log.info(&quot;Selected category: &quot; + category)</stringProp>
       </hashTree>
       <TestFragmentController guiclass="TestFragmentControllerGui" testclass="TestFragmentController" testname="Test Fragment - Login" enabled="false"/>
       <hashTree>
-        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Login Action">
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Login Action" enabled="true">
           <boolProp name="TransactionController.parent">true</boolProp>
           <boolProp name="TransactionController.includeTimers">false</boolProp>
         </TransactionController>

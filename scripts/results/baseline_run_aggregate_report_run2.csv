@@ -1,0 +1,86 @@
+Label,# Samples,Average,Median,90% Line,95% Line,99% Line,Min,Max,Error %,Throughput,Received KB/sec,Sent KB/sec
+JSR223 Sampler - Search terms script,2372,0,0,1,1,3,0,362,0.000%,.93201,0.00,0.00
+[GET] Homepage,2372,721,600,975,1408,2179,465,6556,0.169%,.93147,1505.74,55.69
+Debug Sampler,1384,0,0,1,1,1,0,2,0.000%,1.15686,2.03,0.00
+[GET] Select Category - /en/12-tv-and-audio,251,576,544,693,844,1483,248,6218,0.000%,.09921,25.07,7.92
+[GET] Select Sub-Category - /en/40-bluetooth-speakers,90,494,496,594,663,836,236,1723,0.000%,.03590,7.42,2.40
+[GET] Random product,1715,237,203,274,365,1215,0,3064,0.408%,.67605,66.88,12.04
+[GET] Select Category - /en/14-gaming,215,560,533,716,917,1582,253,1961,0.465%,.08540,21.18,6.57
+[GET] Select Sub-Category - /en/4-men,81,134,116,146,179,268,84,1152,0.000%,.03253,0.56,0.09
+[POST] Search product - Autocomplete - Partial type - mou,33,168,138,158,167,1169,116,1169,0.000%,.02880,1.19,0.04
+[POST] Search product - Autocomplete - Partial type - moun,33,178,125,189,303,1036,105,1036,0.000%,.02880,1.19,0.04
+[POST] Search product - Autocomplete - mountain,33,132,119,144,153,492,96,492,0.000%,.02880,1.19,0.04
+[GET] Search mountain,33,188,169,198,203,555,117,555,0.000%,.02880,2.06,0.28
+Search by term,706,413,379,540,659,1289,230,1994,0.567%,.27871,25.22,2.34
+[GET] Open Product - Search result,706,218,189,249,356,1165,85,1303,0.142%,.27896,29.47,3.26
+Browse product,470,923,811,1371,1683,2286,291,6219,1.489%,.18576,55.80,14.00
+[GET] Select Category - /en/17-furniture,246,560,542,645,853,1595,252,2457,0.000%,.09751,23.92,7.61
+[POST] Add product to cart,535,92,75,99,111,702,42,1108,0.000%,.21209,0.66,0.38
+[POST] Ajax Add to cart,535,59,57,67,72,90,38,378,0.000%,.21210,0.76,0.38
+Add to cart,535,151,135,162,191,752,80,1173,0.000%,.21209,1.42,0.76
+[GET] Select Sub-Category - /en/61-storage-furniture,71,529,508,690,814,1353,263,1407,0.000%,.02854,6.37,1.98
+[GET] View cart,602,111,109,131,145,216,47,1139,0.000%,.23873,3.49,0.77
+[GET] Select Category - /en/6-accessories,253,276,244,316,563,1198,123,1280,1.186%,.10018,9.65,1.90
+[GET] Select Category - /en/25-toys,267,548,531,722,944,1425,248,1667,0.000%,.10579,24.52,7.53
+[GET] Select Sub-Category - /en/93-board-games,92,490,494,567,587,1249,254,1387,0.000%,.03697,7.88,2.53
+[GET] Select Sub-Category - /en/49-gaming-mice,101,509,500,626,796,1418,236,1603,0.000%,.04006,9.35,2.65
+[POST] Search product - Autocomplete - Partial type - sho,96,84,67,90,102,452,54,989,0.000%,.03848,0.42,0.06
+[POST] Search product - Autocomplete - Partial type - shoe,96,163,154,183,223,281,137,348,0.000%,.03848,2.30,0.06
+[POST] Search product - Autocomplete - shoes,96,100,90,106,114,492,69,706,0.000%,.03848,0.75,0.06
+[POST] Search product - Autocomplete - Partial type - shi,121,93,67,87,107,860,54,1033,0.000%,.04824,0.53,0.08
+[GET] Search shoes,96,135,125,148,163,487,76,1141,0.000%,.03848,1.42,0.23
+[POST] Search product - Autocomplete - Partial type - shir,121,68,62,76,82,184,55,327,0.000%,.04823,0.53,0.08
+[POST] Search product - Autocomplete - shirt,121,70,61,77,90,407,54,441,0.000%,.04824,0.53,0.08
+[GET] Search shirt,121,90,83,101,129,292,63,732,0.000%,.04824,0.60,0.07
+[GET] Select Sub-Category - /en/59-living-room-furniture,72,601,507,784,1347,1558,257,2968,0.000%,.02999,6.94,2.04
+[GET] Select Sub-Category - /en/48-gaming-keyboards,102,502,488,582,659,1472,231,2950,0.000%,.04068,8.60,2.78
+[GET] Select Sub-Category - /en/8-home-accessories,88,190,171,224,244,559,118,945,0.000%,.03506,1.71,0.32
+[GET] Select Sub-Category - /en/92-remote-control-toys,89,533,515,618,845,1170,246,1387,0.000%,.03563,8.60,2.52
+[POST] Search product - Autocomplete - Partial type - jea,96,98,98,114,118,136,80,150,0.000%,.03881,0.64,0.06
+[POST] Search product - Autocomplete - Partial type - jean,96,102,87,104,122,222,64,1022,0.000%,.03880,0.64,0.06
+[POST] Search product - Autocomplete - jeans,96,99,88,109,120,143,71,770,0.000%,.03880,0.64,0.06
+[GET] Search jeans,96,87,80,102,112,133,69,361,0.000%,.03880,0.49,0.06
+[POST] Search product - Autocomplete - Partial type - vec,43,111,93,129,198,560,74,560,0.000%,.03879,0.76,0.05
+[POST] Search product - Autocomplete - Partial type - vect,43,93,79,92,97,587,73,587,0.000%,.03880,0.76,0.05
+[POST] Search product - Autocomplete - vector,43,82,82,91,97,101,74,101,0.000%,.03880,0.76,0.05
+[GET] Select Sub-Category - /en/60-bedroom-furniture,84,571,511,882,1390,1488,235,1561,0.000%,.03384,7.44,2.35
+[GET] Search vector,43,115,111,127,141,490,67,490,2.326%,.03880,1.42,0.19
+[GET] Select Sub-Category - /en/7-stationery,98,159,134,182,200,597,1,1191,1.020%,.03943,1.67,0.25
+[GET] Select Sub-Category - /en/47-gaming-controllers,91,516,504,614,806,1417,250,1432,0.000%,.03644,8.04,2.59
+[GET] Select Sub-Category - /en/41-home-cinema-systems,74,492,494,588,890,942,249,1738,0.000%,.02997,6.11,1.89
+[POST] Search product - Autocomplete - Partial type - sam,38,109,103,119,125,302,89,302,0.000%,.03476,1.04,0.04
+[POST] Search product - Autocomplete - Partial type - sams,38,185,162,197,207,838,145,838,0.000%,.03475,2.16,0.04
+[POST] Search product - Autocomplete - samsung,38,98,90,106,125,296,70,296,0.000%,.03475,1.02,0.04
+[GET] Search samsung,38,135,126,159,162,561,80,561,0.000%,.03475,0.80,0.12
+[POST] Search product - Autocomplete - Partial type - hum,49,134,115,154,165,859,97,859,0.000%,.04263,1.41,0.06
+[POST] Search product - Autocomplete - Partial type - humm,49,108,106,118,134,153,95,153,0.000%,.04264,1.41,0.06
+[POST] Search product - Autocomplete - hummingbird,49,115,107,123,131,296,96,296,0.000%,.04263,1.41,0.06
+[GET] Search hummingbird,49,165,137,168,188,1284,110,1284,2.041%,.04263,1.61,0.21
+[GET] Select Category - /en/3-clothes,238,171,145,188,220,1105,0,1339,0.420%,.09608,3.08,0.78
+[GET] Select Category - /en/9-art,251,203,188,228,255,842,109,1303,0.398%,.10080,5.66,1.04
+[POST] Search product - Autocomplete - Partial type - lap,81,134,110,142,218,665,89,1032,0.000%,.03253,0.97,0.05
+[POST] Search product - Autocomplete - Partial type - lapt,81,110,107,134,136,156,93,164,0.000%,.03253,1.17,0.05
+[GET] Select Sub-Category - /en/91-educational-toys,83,509,516,634,734,1187,240,1361,0.000%,.03371,7.21,2.32
+[POST] Search product - Autocomplete - laptop,81,86,80,94,99,118,60,717,0.000%,.03253,0.64,0.05
+[GET] Search laptop,81,129,118,142,153,245,73,1041,2.469%,.03253,1.23,0.21
+[GET] Select Sub-Category - /en/5-women,84,149,116,153,272,985,84,1076,0.000%,.03393,0.59,0.09
+[POST] Search product - Autocomplete - Partial type - swe,110,72,66,98,106,150,53,190,0.000%,.04436,0.43,0.07
+[POST] Search product - Autocomplete - Partial type - swea,110,63,60,74,79,103,53,160,0.000%,.04436,0.43,0.07
+[POST] Search product - Autocomplete - sweater,110,65,61,76,83,104,53,215,0.000%,.04436,0.43,0.07
+[GET] Search sweater,110,97,80,100,109,654,61,886,0.000%,.04436,0.55,0.07
+[GET] Select Sub-Category - /en/58-office-chairs,81,549,505,831,1162,1362,249,1458,0.000%,.03310,7.25,2.29
+[GET] Select Sub-Category - /en/46-gaming-consoles,71,520,497,705,714,1175,244,1351,0.000%,.02960,6.74,2.10
+[GET] Select Sub-Category - /en/38-smart-tvs,91,554,492,744,1312,1626,240,2491,0.000%,.03702,8.06,2.48
+[GET] Select Sub-Category - /en/90-building-sets,97,550,503,781,890,1589,252,3159,0.000%,.03944,8.05,2.58
+[POST] Search product - Autocomplete - Partial type - not,39,49,42,62,71,122,35,122,0.000%,.03541,0.08,0.05
+[POST] Search product - Autocomplete - Partial type - note,39,92,92,103,106,112,82,112,0.000%,.03541,0.69,0.05
+[POST] Search product - Autocomplete - notebook,39,96,90,101,114,314,83,314,0.000%,.03541,0.69,0.05
+[GET] Search notebook,39,112,118,141,145,167,73,167,0.000%,.03541,1.15,0.15
+[GET] Select Sub-Category - /en/39-wireless-headphones,79,522,509,732,813,873,239,1462,0.000%,.03243,7.94,2.33
+Login Action,976,375,341,412,535,1006,123,2826,0.000%,.81404,22.74,5.50
+Browse products,68,886,791,1341,1491,1675,329,2133,0.000%,.05886,15.84,4.62
+[POST] Update product quantity - increase qty,67,87,81,99,105,129,66,422,0.000%,.05890,0.12,0.13
+[POST] Ajax cart refresh,67,68,64,83,100,102,55,105,0.000%,.05890,0.57,0.12
+[POST] Ajax update cart product qty,67,58,57,65,69,71,50,71,0.000%,.05890,0.05,0.12
+Update cart,67,214,208,243,259,263,173,571,0.000%,.05889,0.74,0.36
+TOTAL,19508,280,170,626,815,1442,0,6556,0.174%,7.66036,1967.76,167.23
