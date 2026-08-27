@@ -3,7 +3,7 @@
 # JMeter JVM memory
 export HEAP="-Xms2g -Xmx4g -XX:MaxMetaspaceSize=256m"
 
-SCRIPT=script.jmx
+SCRIPT=script_v2.jmx
 RESULTS_DIR=results
 
 HOST=172.22.4.19
@@ -38,5 +38,6 @@ jmeter \
 -JDURATION=$DURATION \
 -JWAIT_TIME_SHORT=$WAIT_TIME_SHORT \
 -JWAIT_TIME_MID=$WAIT_TIME_MID \
--JHINK_TIME_LONG=$WAIT_TIME_LONG \
+-JWAIT_TIME_LONG=$WAIT_TIME_LONG \
+-Jjmeter.save.saveservice.subresults=false \
 -l "$RESULTS_DIR/results_$TIMESTAMP.jtl"

@@ -1,0 +1,16 @@
+Baseline run
+
+
+Threads = 10
+Rampup = 180
+Duration = 1200 (20 min)
+
+
+Start:
+Data: 26.08.2026 
+Ora: 14:42
+
+
+End:
+Data: 26.08.2026 
+Ora: 15:02

@@ -1,0 +1,13 @@
+Load test
+
+set "THREADS=30"
+set "RAMP_UP=1200"
+set "DURATION=3600"
+
+
+Start time
+
+Date: 26.08.2026
+Hour: 11:39
+
+End time: 12:39
