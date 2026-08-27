@@ -48,15 +48,6 @@ WAIT_TIME_SHORT  = 1000 (1 second)
 WAIT_TIME_MID    = 3000 (3 seconds)
 WAIT_TIME_LONG   = 5000 (5 seconds)
 
-
-# Baseline run
-Before running the load tests we have prerofmred a baseline run with the following arguments:
-
-Threads  - 1
-Ramp_Up  - 1 
-Duration - 20 minutes
-
-
 # Types of testing performed
 1. Load testing    - Done
 2. Stress testing  - To be executed
@@ -70,8 +61,19 @@ Ramp_Up = The time that it takes for the system to start all the threads
 
 ## Load testing
 We aim to check how the system performes under a certain LOAD. For this we have performed multiple runs with increasing number of THREADS:
+Before we started the load testing we performed a baseline run
 
+# Baseline run (27.08.2026)
+Before running the load tests we have prerofmred a baseline run with the following arguments:
 
+Threads  - 1
+Ramp_Up  - 1 
+Duration - 20 minutes
+
+Start: 14:39
+End:   14:59
+
+## Testing sessions ##
 Load test run 1: (24.08.2026)
 
 THREADS=50
