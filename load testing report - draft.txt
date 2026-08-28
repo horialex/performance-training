@@ -36,6 +36,13 @@ Frequency distribution
 3. Add to cart                    - 20%
 4. Update cart                    - 7%
 
+! No checkout scenario covered
+
+
+# Media assets
+The application does not have a CDN - all the resources are on server
+- We set the script to downlaod all the embeded resources to simmulate the user browser usage as close as possible
+
 
 # User think time simulation (wait time)
 We can't do a proper load testing withut taking into consideration the user think time, we don't want to just bombard the 

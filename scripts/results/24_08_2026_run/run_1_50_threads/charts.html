@@ -1,0 +1,595 @@
+<title>PrestaShop Load Run 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<style>
+:root{
+  color-scheme: light;
+  --plane:#eceff4; --surface:#fbfcfd; --surface-2:#f4f6f9;
+  --ink:#0e1116; --ink-2:#4c5563; --muted:#7f8896;
+  --grid:#e3e7ed; --rule:#cbd1db; --ring:rgba(14,17,22,.11);
+  --s1:#2a78d6; --s2:#eb6834; --dim:#aeb6c2;
+  --crit:#d03b3b; --warn:#fab219; --good:#0ca30c;
+  --shadow:0 1px 2px rgba(14,17,22,.05);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme: dark;
+    --plane:#0b0d11; --surface:#14171d; --surface-2:#1b1f26;
+    --ink:#f3f5f8; --ink-2:#a6aebc; --muted:#79828f;
+    --grid:#242a33; --rule:#333a45; --ring:rgba(255,255,255,.10);
+    --s1:#3987e5; --s2:#d95926; --dim:#5b6472;
+    --crit:#d03b3b; --warn:#fab219; --good:#0ca30c;
+    --shadow:0 1px 2px rgba(0,0,0,.4);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --plane:#0b0d11; --surface:#14171d; --surface-2:#1b1f26;
+  --ink:#f3f5f8; --ink-2:#a6aebc; --muted:#79828f;
+  --grid:#242a33; --rule:#333a45; --ring:rgba(255,255,255,.10);
+  --s1:#3987e5; --s2:#d95926; --dim:#5b6472;
+  --crit:#d03b3b; --warn:#fab219; --good:#0ca30c;
+  --shadow:0 1px 2px rgba(0,0,0,.4);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--plane); color:var(--ink);
+  font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:15px; line-height:1.62; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1120px; margin:0 auto; padding:56px 28px 96px; display:flex; flex-direction:column; gap:38px}
+
+/* ---------- header ---------- */
+.eyebrow{
+  font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:11.5px; font-weight:500;
+  letter-spacing:.13em; text-transform:uppercase; color:var(--muted); margin:0;
+}
+h1{
+  font-family:Archivo,system-ui,sans-serif; font-weight:700; font-size:clamp(30px,4.4vw,46px);
+  line-height:1.05; letter-spacing:-.022em; margin:10px 0 0; text-wrap:balance;
+}
+.sub{max-width:66ch; color:var(--ink-2); margin:14px 0 0}
+
+.hero{
+  display:flex; flex-wrap:wrap; align-items:flex-end; gap:28px 44px;
+  margin-top:32px; padding-top:28px; border-top:1px solid var(--rule);
+}
+.hero-num{
+  font-family:Archivo,system-ui,sans-serif; font-weight:700; font-size:76px; line-height:.92;
+  letter-spacing:-.035em; color:var(--s2); display:block;
+}
+.hero-num span{font-size:38px; letter-spacing:-.02em}
+.hero-cap{max-width:44ch; color:var(--ink-2); font-size:14.5px; margin:0}
+.hero-cap b{color:var(--ink); font-weight:600}
+
+/* ---------- run params ---------- */
+.params{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(128px,1fr)); gap:1px;
+  background:var(--rule); border:1px solid var(--rule); border-radius:4px; overflow:hidden;
+  margin:30px 0 0;
+}
+.param{background:var(--surface); padding:13px 16px}
+.param dt{
+  font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:10.5px; font-weight:500;
+  letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin:0 0 3px;
+}
+.param dd{margin:0; font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:14px; font-weight:500; color:var(--ink)}
+
+/* ---------- kpi ---------- */
+.kpis{display:grid; grid-template-columns:repeat(auto-fit,minmax(196px,1fr)); gap:14px}
+.kpi{
+  background:var(--surface); border:1px solid var(--ring); border-radius:4px;
+  padding:18px 20px 20px; box-shadow:var(--shadow); display:flex; flex-direction:column; gap:5px;
+}
+.kpi-label{font-size:13px; color:var(--ink-2)}
+.kpi-val{font-family:Archivo,system-ui,sans-serif; font-weight:600; font-size:33px; line-height:1.06; letter-spacing:-.02em}
+.kpi-note{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:11.5px; color:var(--muted)}
+
+/* ---------- cards ---------- */
+.card{
+  background:var(--surface); border:1px solid var(--ring); border-radius:4px;
+  box-shadow:var(--shadow); overflow:hidden;
+}
+.card-head{padding:22px 24px 0; display:flex; flex-direction:column; gap:6px}
+.card h2{font-family:Archivo,system-ui,sans-serif; font-weight:600; font-size:21px; letter-spacing:-.014em; margin:0; text-wrap:balance}
+.card-sub{margin:0; font-size:14px; color:var(--ink-2); max-width:74ch}
+.legend{display:flex; flex-wrap:wrap; gap:18px; padding:16px 24px 0; align-items:center}
+.lg{display:flex; align-items:center; gap:7px; font-size:13px; color:var(--ink-2)}
+.sw{width:11px; height:11px; border-radius:2px; flex:none}
+.sw.a{background:var(--s1)} .sw.b{background:var(--s2)} .sw.d{background:var(--dim)}
+.sw.line{width:15px; height:2px; border-radius:0; background:var(--muted)}
+.plot{padding:14px 12px 8px; overflow-x:auto}
+.plot svg{display:block; width:100%; min-width:660px; height:auto}
+.card-foot{
+  padding:14px 24px 20px; margin:2px 0 0; font-size:13.5px; color:var(--ink-2);
+  border-top:1px solid var(--grid); max-width:82ch;
+}
+.card-foot strong{color:var(--ink); font-weight:600}
+
+/* ---------- svg ink ---------- */
+.grid-line{stroke:var(--grid); stroke-width:1; shape-rendering:crispEdges}
+.axis-line{stroke:var(--rule); stroke-width:1; shape-rendering:crispEdges}
+.ref-line{stroke:var(--muted); stroke-width:1; shape-rendering:crispEdges}
+.tick{fill:var(--muted); font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:11px; font-variant-numeric:tabular-nums}
+.cat{fill:var(--ink-2); font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:11.5px}
+.val{fill:var(--ink); font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:11.5px; font-weight:500; font-variant-numeric:tabular-nums}
+.val-2{fill:var(--muted); font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:10.5px; font-variant-numeric:tabular-nums}
+.axis-title{fill:var(--muted); font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:10.5px; letter-spacing:.1em; text-transform:uppercase}
+.b-avg{fill:var(--s1)} .b-p95{fill:var(--s2)} .b-one{fill:var(--s1)}
+.dot{fill:var(--dim); stroke:var(--surface); stroke-width:2}
+.dot.hot{fill:var(--s2)}
+.hit{fill:transparent; cursor:pointer}
+.leader{stroke:var(--muted); stroke-width:1; fill:none}
+
+/* ---------- tooltip ---------- */
+.tip{
+  position:fixed; z-index:40; pointer-events:none; opacity:0; transition:opacity .1s;
+  background:var(--surface); border:1px solid var(--rule); border-radius:4px;
+  box-shadow:0 4px 14px rgba(14,17,22,.14); padding:9px 12px; min-width:150px;
+  font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:11.5px; color:var(--ink-2);
+  left:0; top:0;
+}
+.tip.on{opacity:1}
+.tip-t{display:block; color:var(--ink); font-weight:600; margin-bottom:5px; font-size:11.5px}
+.tip-r{display:flex; justify-content:space-between; gap:16px; font-variant-numeric:tabular-nums}
+.tip-r b{color:var(--ink); font-weight:500}
+
+/* ---------- findings ---------- */
+.findings{display:flex; flex-direction:column; gap:0; padding:8px 24px 24px}
+.finding{display:grid; grid-template-columns:auto 1fr; gap:16px; padding:20px 0; border-top:1px solid var(--rule)}
+.finding:first-child{border-top:none; padding-top:6px}
+.sev{width:8px; height:8px; border-radius:50%; margin-top:9px; flex:none}
+.sev.c{background:var(--crit)} .sev.w{background:var(--warn)} .sev.g{background:var(--good)}
+.finding h3{font-family:Archivo,system-ui,sans-serif; font-weight:600; font-size:16.5px; margin:0 0 5px; letter-spacing:-.01em}
+.finding p{margin:0; color:var(--ink-2); font-size:14.5px; max-width:78ch}
+.finding p + p{margin-top:8px}
+.finding strong{color:var(--ink); font-weight:600}
+code{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.9em; background:var(--surface-2); padding:1px 5px; border-radius:3px; color:var(--ink)}
+
+/* ---------- table ---------- */
+.tbl-wrap{overflow-x:auto; padding:14px 24px 22px}
+table{border-collapse:collapse; width:100%; min-width:660px; font-size:13.5px}
+th,td{padding:9px 14px; text-align:right; white-space:nowrap; border-bottom:1px solid var(--grid)}
+th:first-child,td:first-child{text-align:left; font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:12.5px}
+thead th{
+  font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:10.5px; font-weight:500;
+  letter-spacing:.08em; text-transform:uppercase; color:var(--muted); border-bottom:1px solid var(--rule);
+}
+tbody td{font-variant-numeric:tabular-nums; color:var(--ink-2)}
+tbody tr:hover td{background:var(--surface-2)}
+tfoot td{font-variant-numeric:tabular-nums; font-weight:600; color:var(--ink); border-top:1px solid var(--rule); border-bottom:none}
+.hi{color:var(--s2); font-weight:600}
+
+footer{border-top:1px solid var(--rule); padding-top:20px; font-size:13px; color:var(--muted); max-width:78ch}
+
+@media (prefers-reduced-motion: reduce){*{transition:none !important; animation:none !important}}
+:focus-visible{outline:2px solid var(--s1); outline-offset:2px; border-radius:2px}
+</style>
+
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">Load test &middot; run 1 &middot; 24 Aug 2026</p>
+    <h1>PrestaShop at 50 concurrent users</h1>
+    <p class="sub">
+      One hour of sustained load against <code>172.22.4.19</code>, 60% guest / 40% logged-in,
+      with think time and full embedded-resource download. 35,749 samples across 15 requests.
+      Container and transaction rows are excluded &mdash; every row below is a real HTTP call.
+    </p>
+
+    <div class="hero">
+      <span class="hero-num">13.9<span> s</span></span>
+      <p class="hero-cap">
+        is the <b>95th-percentile homepage load</b>. One user in twenty waited that long for the
+        first page of the shop. Nothing errored &mdash; the system stayed up and got slow.
+      </p>
+    </div>
+
+    <dl class="params">
+      <div class="param"><dt>Threads</dt><dd>50</dd></div>
+      <div class="param"><dt>Ramp-up</dt><dd>300 s</dd></div>
+      <div class="param"><dt>Duration</dt><dd>3,900 s</dd></div>
+      <div class="param"><dt>Window</dt><dd>16:52&ndash;18:00</dd></div>
+      <div class="param"><dt>Samplers</dt><dd>15</dd></div>
+    </dl>
+  </header>
+
+  <section class="kpis" id="kpis"></section>
+
+  <section class="card">
+    <div class="card-head">
+      <h2>Response time by request</h2>
+      <p class="card-sub">
+        Mean against 95th percentile, sorted slowest first. The gap between the two bars is the
+        tail: where it is wide, a minority of users had a far worse experience than the average suggests.
+      </p>
+    </div>
+    <div class="legend">
+      <span class="lg"><span class="sw a"></span>Average</span>
+      <span class="lg"><span class="sw b"></span>95% line</span>
+      <span class="lg"><span class="sw line"></span>3 s orientation mark</span>
+    </div>
+    <div class="plot"><svg id="c1" role="img" aria-label="Grouped bar chart of average and 95th percentile response time for 15 requests"></svg></div>
+    <p class="card-foot">
+      The whole <strong>browse chain</strong> &mdash; homepage, category, sub-category, product page &mdash; sits above
+      4.5 s on average and 8.9 s at p95. Every AJAX endpoint stays under 250 ms. The client has set no
+      response-time target, so the 3 s mark is only a common orientation threshold, not a pass/fail line.
+    </p>
+  </section>
+
+  <section class="card">
+    <div class="card-head">
+      <h2>Request volume and throughput</h2>
+      <p class="card-sub">
+        Sample count per request, with the throughput it corresponds to. The two are one measurement:
+        every request ran for the same ~3,890 s window, so throughput is sample count divided by that
+        window. They share a chart because a second one would repeat this shape exactly.
+      </p>
+    </div>
+    <div class="plot"><svg id="c2" role="img" aria-label="Bar chart of sample count per request with throughput labels"></svg></div>
+    <p class="card-foot">
+      Volume follows the flow mix set in the plan &mdash; browse 50%, search 30%, add-to-cart 20%, update cart 7%.
+      <strong>Throughput carries no independent signal within a single run</strong>; it becomes the metric to
+      watch when runs 1&ndash;4 are compared, where it shows whether the server absorbed the extra threads or saturated.
+    </p>
+  </section>
+
+  <section class="card">
+    <div class="card-head">
+      <h2>Where the load meets the latency</h2>
+      <p class="card-sub">
+        Throughput against 95th-percentile response time. Requests toward the top right are both
+        heavily used and slow &mdash; they set what most users actually feel, and they are where tuning pays back most.
+      </p>
+    </div>
+    <div class="legend">
+      <span class="lg"><span class="sw b"></span>Browse chain</span>
+      <span class="lg"><span class="sw d"></span>Other requests</span>
+    </div>
+    <div class="plot"><svg id="c3" role="img" aria-label="Scatter plot of throughput against 95th percentile response time"></svg></div>
+    <p class="card-foot">
+      Search autocomplete is the counter-example: the second-highest volume in the run at
+      <strong>1.35 req/s</strong>, yet a p95 of 3.1 s and a median of 99 ms. The server is not short of
+      capacity for light requests &mdash; the cost is concentrated in full page renders and their assets.
+    </p>
+  </section>
+
+  <section class="card">
+    <div class="card-head"><h2>Reading the run</h2></div>
+    <div class="findings">
+
+      <article class="finding">
+        <span class="sev c"></span>
+        <div>
+          <h3>The homepage is the bottleneck, and its assets are why</h3>
+          <p>
+            At 10.0 s average and 13.9 s p95 it is roughly twice as slow as the next request. It also pulls
+            <strong>2,439 KB/s</strong> &mdash; more received traffic than every other request combined. The rest
+            of the plan sits in the tens of KB/s.
+          </p>
+          <p>
+            The plan downloads embedded resources with a 6-thread pool, so a homepage sample times the HTML
+            plus its images, CSS and JS. With no CDN in front of the shop, all of that is served by the same
+            host under load. Static-asset delivery is the highest-leverage thing to change before re-testing.
+          </p>
+        </div>
+      </article>
+
+      <article class="finding">
+        <span class="sev w"></span>
+        <div>
+          <h3>The browse chain degrades as a block</h3>
+          <p>
+            Category (4.86 s), sub-category (4.52 s) and product details (4.88 s) are almost indistinguishable
+            in both average and p95, and each lands near 9 s at p95. They share a rendering path, so they are
+            likely to respond to one fix rather than three separate ones.
+          </p>
+        </div>
+      </article>
+
+      <article class="finding">
+        <span class="sev g"></span>
+        <div>
+          <h3>Correctness held; only speed degraded</h3>
+          <p>
+            The overall error rate is <strong>0.45%</strong>, peaking at 1.09% on product details. At 50
+            threads the application does not break &mdash; it slows down. That distinction shapes the next
+            step: 50 users is below the breaking point, so the stress run still has to find it.
+          </p>
+        </div>
+      </article>
+
+      <article class="finding">
+        <span class="sev g"></span>
+        <div>
+          <h3>AJAX endpoints are healthy</h3>
+          <p>
+            Ajax update cart (78 ms), cart refresh (111 ms), Ajax add to cart (127 ms) and view cart (235 ms)
+            are all fast, three of the four with a p95 at or below 200 ms. Application logic and database
+            access are not the constraint at this load level.
+          </p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="card-head">
+      <h2>Full figures</h2>
+      <p class="card-sub">Every value plotted above, from <code>aggregate_polished.csv</code>. Times in milliseconds.</p>
+    </div>
+    <div class="tbl-wrap">
+      <table id="tbl">
+        <thead>
+          <tr>
+            <th scope="col">Request</th><th scope="col">Samples</th><th scope="col">Average</th>
+            <th scope="col">95% line</th><th scope="col">Throughput</th><th scope="col">Error %</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+        <tfoot></tfoot>
+      </table>
+    </div>
+  </section>
+
+  <footer>
+    Source: <code>scripts/results/24_08_2026_run/run_1_50_threads/aggregate_polished.csv</code>, derived from
+    <code>jmeter_report_polished.jtl</code> &mdash; 35,749 samples, container rows removed, the two
+    <code>View cart</code> label variants merged. JMeter 5.6.3.
+  </footer>
+</div>
+
+<div class="tip" id="tip" role="status" aria-live="polite"></div>
+
+<script>
+const DATA = [
+  {label:"[GET] Homepage",                     n:5887, avg:10007, p95:13914, tp:1.50893, err:0.27, hot:1},
+  {label:"[GET] Open Login page",              n:1981, avg:2869,  p95:6458,  tp:0.50837, err:0.51, hot:0},
+  {label:"[POST] Login",                       n:1981, avg:2322,  p95:4865,  tp:0.50825, err:0.25, hot:0},
+  {label:"[GET] Select Category",              n:4238, avg:4864,  p95:9946,  tp:1.08833, err:0.76, hot:1},
+  {label:"[GET] Select Sub-Category",          n:4231, avg:4521,  p95:9682,  tp:1.08731, err:0.76, hot:1},
+  {label:"[GET] Product details",              n:4228, avg:4880,  p95:8946,  tp:1.08723, err:1.09, hot:1},
+  {label:"[POST] Search - Autocomplete",       n:5254, avg:545,   p95:3121,  tp:1.35250, err:0.11, hot:0},
+  {label:"[POST] Add product to cart",         n:1301, avg:718,   p95:3668,  tp:0.33537, err:0.31, hot:0},
+  {label:"[POST] Ajax Add to cart",            n:1301, avg:127,   p95:88,    tp:0.33538, err:0.00, hot:0},
+  {label:"[GET] Search",                       n:1749, avg:1339,  p95:4042,  tp:0.45106, err:0.29, hot:0},
+  {label:"[GET] View cart",                    n:1438, avg:235,   p95:194,   tp:0.37062, err:0.00, hot:0},
+  {label:"[GET] Open Product - Search result", n:1749, avg:2910,  p95:6413,  tp:0.45059, err:0.29, hot:0},
+  {label:"[POST] Update product quantity",     n:137,  avg:565,   p95:3770,  tp:0.03601, err:0.00, hot:0},
+  {label:"[POST] Ajax cart refresh",           n:137,  avg:111,   p95:103,   tp:0.03602, err:0.00, hot:0},
+  {label:"[POST] Ajax update cart",            n:137,  avg:78,    p95:83,    tp:0.03602, err:0.00, hot:0}
+];
+
+const NS = "http://www.w3.org/2000/svg";
+const fmt = n => n.toLocaleString("en-US");
+const secs = ms => (ms / 1000).toFixed(ms < 1000 ? 2 : 1);
+
+function el(tag, attrs, txt){
+  const e = document.createElementNS(NS, tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (txt != null) e.textContent = txt;
+  return e;
+}
+
+/* horizontal bar: 4px rounded data-end, square at the baseline */
+function barPath(x, y, w, h){
+  const r = Math.min(4, Math.max(w, 0), h / 2);
+  if (w <= 0.6) return "M" + x + "," + y + " h0.6 v" + h + " h-0.6 Z";
+  return "M" + x + "," + y +
+         " H" + (x + w - r) + " Q" + (x + w) + "," + y + " " + (x + w) + "," + (y + r) +
+         " V" + (y + h - r) + " Q" + (x + w) + "," + (y + h) + " " + (x + w - r) + "," + (y + h) +
+         " H" + x + " Z";
+}
+
+/* ---------- tooltip ---------- */
+const tip = document.getElementById("tip");
+
+function showTip(clientX, clientY, title, rows){
+  let html = '<span class="tip-t"></span>';
+  tip.innerHTML = html;
+  tip.firstChild.textContent = title;
+  rows.forEach(function(r){
+    const line = document.createElement("span");
+    line.className = "tip-r";
+    const b = document.createElement("b");
+    b.textContent = r[1];
+    line.append(r[0] + " ", b);
+    tip.append(line);
+  });
+  tip.classList.add("on");
+  moveTip(clientX, clientY);
+}
+function moveTip(clientX, clientY){
+  const pad = 14, w = tip.offsetWidth, h = tip.offsetHeight;
+  let x = clientX + pad, y = clientY + pad;
+  if (x + w > window.innerWidth - 8) x = clientX - w - pad;
+  if (y + h > window.innerHeight - 8) y = clientY - h - pad;
+  tip.style.transform = "translate(" + Math.max(8, x) + "px," + Math.max(8, y) + "px)";
+}
+const hideTip = () => tip.classList.remove("on");
+
+function bindTip(node, title, rows){
+  node.addEventListener("mouseenter", e => showTip(e.clientX, e.clientY, title, rows));
+  node.addEventListener("mousemove", e => moveTip(e.clientX, e.clientY));
+  node.addEventListener("mouseleave", hideTip);
+  node.setAttribute("tabindex", "0");
+  node.addEventListener("focus", function(){
+    const r = node.getBoundingClientRect();
+    showTip(r.right, r.top, title, rows);
+  });
+  node.addEventListener("blur", hideTip);
+}
+window.addEventListener("scroll", hideTip, {passive:true});
+
+/* ---------- derived totals ---------- */
+const total = DATA.reduce((s, d) => s + d.n, 0);
+const wAvg  = DATA.reduce((s, d) => s + d.n * d.avg, 0) / total;
+const tpSum = DATA.reduce((s, d) => s + d.tp, 0);
+const wErr  = DATA.reduce((s, d) => s + d.n * d.err, 0) / total;
+
+/* ---------- KPI row ---------- */
+[
+  ["Samples recorded",       fmt(total),                    "15 requests · 65 min"],
+  ["Weighted mean response", (wAvg / 1000).toFixed(2) + " s", "across all samples"],
+  ["Aggregate throughput",   tpSum.toFixed(2) + " req/s",   fmt(Math.round(tpSum * 60)) + " requests / min"],
+  ["Error rate",             wErr.toFixed(2) + "%",         "peak 1.09% · product details"]
+].forEach(function(k){
+  const box = document.createElement("div");
+  box.className = "kpi";
+  const l = document.createElement("span"); l.className = "kpi-label"; l.textContent = k[0];
+  const v = document.createElement("span"); v.className = "kpi-val";   v.textContent = k[1];
+  const n = document.createElement("span"); n.className = "kpi-note";  n.textContent = k[2];
+  box.append(l, v, n);
+  document.getElementById("kpis").append(box);
+});
+
+/* ---------- chart 1: average vs 95th percentile ---------- */
+(function(){
+  const d = DATA.slice().sort((a, b) => b.p95 - a.p95);
+  const W = 1040, PADL = 286, PADR = 74, PADT = 30, ROW = 46, AX = 46;
+  const H = PADT + d.length * ROW + AX;
+  const pw = W - PADL - PADR, xMax = 15000;
+  const x = v => PADL + (v / xMax) * pw;
+  const base = PADT + d.length * ROW;
+  const svg = document.getElementById("c1");
+  svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+
+  for (let t = 0; t <= 15000; t += 3000){
+    svg.append(el("line", {class:"grid-line", x1:x(t), x2:x(t), y1:PADT - 6, y2:base}));
+    svg.append(el("text", {class:"tick", x:x(t), y:base + 20, "text-anchor":"middle"},
+                 (t / 1000) + (t === 15000 ? " s" : "")));
+  }
+  svg.append(el("line", {class:"ref-line", x1:x(3000), x2:x(3000), y1:PADT - 16, y2:base}));
+  svg.append(el("text", {class:"axis-title", x:x(3000), y:PADT - 22, "text-anchor":"middle"}, "3 s"));
+  svg.append(el("line", {class:"axis-line", x1:PADL, x2:W - PADR, y1:base, y2:base}));
+  svg.append(el("text", {class:"axis-title", x:PADL, y:H - 6}, "Response time"));
+
+  d.forEach(function(r, i){
+    const yTop = PADT + i * ROW, mid = yTop + ROW / 2;
+    svg.append(el("text", {class:"cat", x:PADL - 14, y:mid + 4, "text-anchor":"end"}, r.label));
+    /* two 13px bars with a 2px surface gap between them */
+    svg.append(el("path", {class:"b-avg", d:barPath(PADL, mid - 14, x(r.avg) - PADL, 13)}));
+    svg.append(el("path", {class:"b-p95", d:barPath(PADL, mid + 1,  x(r.p95) - PADL, 13)}));
+    /* label the three extremes only; the table carries the rest */
+    if (i < 3) svg.append(el("text", {class:"val", x:x(r.p95) + 8, y:mid + 11}, secs(r.p95) + " s"));
+
+    const hit = el("rect", {class:"hit", x:PADL, y:yTop + 3, width:pw + PADR - 10, height:ROW - 6,
+      role:"button", "aria-label":r.label + ": average " + secs(r.avg) + " seconds, 95th percentile " + secs(r.p95) + " seconds"});
+    bindTip(hit, r.label, [["Average", secs(r.avg) + " s"], ["95% line", secs(r.p95) + " s"], ["Samples", fmt(r.n)]]);
+    svg.append(hit);
+  });
+})();
+
+/* ---------- chart 2: volume, throughput as the second unit ---------- */
+(function(){
+  const d = DATA.slice().sort((a, b) => b.n - a.n);
+  const W = 1040, PADL = 286, PADR = 150, PADT = 24, ROW = 36, AX = 46;
+  const H = PADT + d.length * ROW + AX;
+  const pw = W - PADL - PADR, xMax = 6000;
+  const x = v => PADL + (v / xMax) * pw;
+  const base = PADT + d.length * ROW;
+  const svg = document.getElementById("c2");
+  svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+
+  for (let t = 0; t <= 6000; t += 2000){
+    svg.append(el("line", {class:"grid-line", x1:x(t), x2:x(t), y1:PADT - 6, y2:base}));
+    svg.append(el("text", {class:"tick", x:x(t), y:base + 20, "text-anchor":"middle"}, fmt(t)));
+  }
+  svg.append(el("line", {class:"axis-line", x1:PADL, x2:W - PADR, y1:base, y2:base}));
+  svg.append(el("text", {class:"axis-title", x:PADL, y:H - 6}, "Samples"));
+
+  d.forEach(function(r, i){
+    const yTop = PADT + i * ROW, mid = yTop + ROW / 2;
+    svg.append(el("text", {class:"cat", x:PADL - 14, y:mid + 4, "text-anchor":"end"}, r.label));
+    svg.append(el("path", {class:"b-one", d:barPath(PADL, mid - 8, x(r.n) - PADL, 16)}));
+    /* single series: value at the tip, throughput as the same value in its other unit */
+    svg.append(el("text", {class:"val",   x:x(r.n) + 9, y:mid - 1},  fmt(r.n)));
+    svg.append(el("text", {class:"val-2", x:x(r.n) + 9, y:mid + 11}, r.tp.toFixed(3) + " req/s"));
+
+    const hit = el("rect", {class:"hit", x:PADL, y:yTop + 2, width:pw + PADR - 16, height:ROW - 4,
+      role:"button", "aria-label":r.label + ": " + fmt(r.n) + " samples, " + r.tp.toFixed(3) + " requests per second"});
+    bindTip(hit, r.label, [["Samples", fmt(r.n)], ["Throughput", r.tp.toFixed(3) + " req/s"], ["95% line", secs(r.p95) + " s"]]);
+    svg.append(hit);
+  });
+})();
+
+/* ---------- chart 3: throughput against p95 ---------- */
+(function(){
+  const W = 1040, H = 470, PADL = 66, PADR = 40, PADT = 30, PADB = 56;
+  const pw = W - PADL - PADR, ph = H - PADT - PADB;
+  const xMax = 1.6, yMax = 15000;
+  const x = v => PADL + (v / xMax) * pw;
+  const y = v => PADT + ph - (v / yMax) * ph;
+  const svg = document.getElementById("c3");
+  svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+
+  for (let t = 0; t <= 15000; t += 3000){
+    svg.append(el("line", {class:"grid-line", x1:PADL, x2:PADL + pw, y1:y(t), y2:y(t)}));
+    svg.append(el("text", {class:"tick", x:PADL - 10, y:y(t) + 4, "text-anchor":"end"}, t / 1000));
+  }
+  for (let i = 0; i <= 4; i++){
+    const t = i * 0.4;
+    svg.append(el("text", {class:"tick", x:x(t), y:PADT + ph + 20, "text-anchor":"middle"}, t.toFixed(1)));
+  }
+  svg.append(el("line", {class:"axis-line", x1:PADL, x2:PADL + pw, y1:PADT + ph, y2:PADT + ph}));
+  svg.append(el("text", {class:"axis-title", x:PADL, y:H - 8}, "Throughput — req/s"));
+  svg.append(el("text", {class:"axis-title", x:PADL - 10, y:PADT - 12, "text-anchor":"end"}, "95% — s"));
+
+  /* leader lines keep labels attached where the browse points overlap */
+  [
+    {t:"[GET] Homepage",              ax:1.509, ay:13914, lx:1.30, ly:14400, anchor:"end",   dx:-10},
+    {t:"Category / Sub-category",     ax:1.088, ay:9814,  lx:0.86, ly:11700, anchor:"end",   dx:-10},
+    {t:"[GET] Product details",       ax:1.087, ay:8946,  lx:1.28, ly:7600,  anchor:"start", dx:10},
+    {t:"[POST] Search - Autocomplete",ax:1.353, ay:3121,  lx:1.16, ly:1500,  anchor:"end",   dx:-10},
+    {t:"[GET] Open Product",          ax:0.451, ay:6413,  lx:0.30, ly:8100,  anchor:"end",   dx:-10}
+  ].forEach(function(a){
+    svg.append(el("path", {class:"leader", d:"M" + x(a.ax) + "," + y(a.ay) + " L" + x(a.lx) + "," + y(a.ly)}));
+    svg.append(el("text", {class:"val", x:x(a.lx) + a.dx, y:y(a.ly) + 4, "text-anchor":a.anchor}, a.t));
+  });
+
+  DATA.forEach(function(r){
+    svg.append(el("circle", {class:"dot" + (r.hot ? " hot" : ""), cx:x(r.tp), cy:y(r.p95), r:6}));
+    const hit = el("circle", {class:"hit", cx:x(r.tp), cy:y(r.p95), r:15,
+      role:"button", "aria-label":r.label + ": " + r.tp.toFixed(3) + " requests per second, 95th percentile " + secs(r.p95) + " seconds"});
+    bindTip(hit, r.label, [["Throughput", r.tp.toFixed(3) + " req/s"], ["95% line", secs(r.p95) + " s"],
+                           ["Average", secs(r.avg) + " s"], ["Samples", fmt(r.n)]]);
+    svg.append(hit);
+  });
+})();
+
+/* ---------- table view ---------- */
+(function(){
+  const body = document.querySelector("#tbl tbody");
+  DATA.slice().sort((a, b) => b.p95 - a.p95).forEach(function(r){
+    const tr = document.createElement("tr");
+    const cells = [
+      [r.label, ""],
+      [fmt(r.n), ""],
+      [fmt(r.avg), r.avg >= 4000 ? "hi" : ""],
+      [fmt(r.p95), r.p95 >= 8000 ? "hi" : ""],
+      [r.tp.toFixed(3), ""],
+      [r.err.toFixed(2) + "%", ""]
+    ];
+    cells.forEach(function(c){
+      const td = document.createElement("td");
+      td.textContent = c[0];
+      if (c[1]) td.className = c[1];
+      tr.append(td);
+    });
+    body.append(tr);
+  });
+
+  const foot = document.createElement("tr");
+  [["All requests"], [fmt(total)], [fmt(Math.round(wAvg))], ["—"],
+   [tpSum.toFixed(3)], [wErr.toFixed(2) + "%"]].forEach(function(c){
+    const td = document.createElement("td");
+    td.textContent = c[0];
+    foot.append(td);
+  });
+  document.querySelector("#tbl tfoot").append(foot);
+})();
+</script>
