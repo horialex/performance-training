@@ -18,3 +18,5 @@ scripts/temp/
 
 # GUI save backups
 *.jmx.bak
+
+scripts/results

@@ -1,0 +1,129 @@
+LOAD TESTING REPORT - DRAFT
+
+# Metadata
+Run period: 24.08.2026 -> 27.08.2026
+HOST: http://172.22.4.19
+PORT: 80
+
+
+# Run location: Evozon's infrastructure - Romania (Cluj Napoca) via VPN
+
+
+# Caching and cookies:
+With this in mind we simmualted the cookies and caching mechansim and we cleared the cache and cookies after each iteration
+
+
+# Login mechanism:
+The application has a login mechanism so we tested both as guests and as logged users using a proportion of:
+60% Guest users
+40% Logged users
+
+We used a single user for the login:
+horatiu.encian@evozon.com
+
+
+# User Jurneys:
+We tried to cover the most important and used jurneys that a user usually does in this application. 
+Using a Throughtput controller we distributed the load on these jurneys based on the frequency that they happen.
+* The way we choose to distribute the frequency of these jurneys in our runs is either by using commons sense, 
+discussing with the client or by looking at the logs they collect from the real application.
+In this case we used the common sense since we had no inforamtion about the other ways to do this.
+
+Frequency distribution
+0. Login -                        - 100% in case of  Logged in Thread Group 
+1. Explore application / products - 50%
+2. Search 			  - 30%
+3. Add to cart                    - 20%
+4. Update cart                    - 7%
+
+! No checkout scenario covered
+
+
+# Media assets
+The application does not have a CDN - all the resources are on server
+- We set the script to downlaod all the embeded resources to simmulate the user browser usage as close as possible
+
+
+# User think time simulation (wait time)
+We can't do a proper load testing withut taking into consideration the user think time, we don't want to just bombard the 
+server with requests but we want to simulate a real life situation as close as possible.
+This can be customized from otuside the script
+We had 3 types of user pause, short, medium and long and we have put them between the requests based on how much a real user 
+would think and pause between his actions:
+
+WAIT_TIME_SHORT  = 1000 (1 second)
+WAIT_TIME_MID    = 3000 (3 seconds)
+WAIT_TIME_LONG   = 5000 (5 seconds)
+
+# Types of testing performed
+1. Load testing    - Done
+2. Stress testing  - To be executed
+3. Spike testing   - To be executed
+
+# Glosary of terms
+Threads ~= User
+Ramp_Up = The time that it takes for the system to start all the threads
+
+
+
+## Load testing
+We aim to check how the system performes under a certain LOAD. For this we have performed multiple runs with increasing number of THREADS:
+Before we started the load testing we performed a baseline run
+
+# Baseline run (27.08.2026)
+Before running the load tests we have prerofmred a baseline run with the following arguments:
+
+Threads  - 1
+Ramp_Up  - 1 
+Duration - 20 minutes
+
+Start: 14:39
+End:   14:59
+
+## Testing sessions ##
+Load test run 1: (24.08.2026)
+
+THREADS=50
+RAMP_UP=300
+DURATION=3900 (1h + 5 min for the rampup)
+
+Start 16:52
+End   18:00
+
+
+
+Load test run 2: (25.08.2026)
+
+THREADS=100
+RAMP_UP=1200
+DURATION=3600
+
+Start: 14:42
+End:   15:42
+
+
+Load test run 3: (26.08.2026)
+
+THREADS=200
+RAMP_UP=1200
+DURATION=3600
+
+Start: 08:55
+End:   09:55
+
+
+Load test run 4: (26.08.2026)
+
+THREADS=30
+RAMP_UP=1200
+DURATION=3600
+
+Start: 11:39
+End:   12:39 
+
+
+### TODO: Add graphs, interpretations, etc
+
+
+
+
