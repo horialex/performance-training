@@ -61,11 +61,13 @@
           </elementProp>
           <elementProp name="DURATION" elementType="Argument">
             <stringProp name="Argument.name">DURATION</stringProp>
-            <stringProp name="Argument.value">${__P(DURATION,60)}</stringProp>
+            <stringProp name="Argument.value">${__P(DURATION,600)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
       </elementProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
     </TestPlan>
     <hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group - Guest">
@@ -252,7 +254,7 @@ vars.put(
           </UniformRandomTimer>
           <hashTree/>
         </hashTree>
-        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="Throughput Controller - Browse">
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="Throughput Controller - Browse" enabled="true">
           <intProp name="ThroughputController.style">1</intProp>
           <boolProp name="ThroughputController.perThread">false</boolProp>
           <intProp name="ThroughputController.maxThroughput">1</intProp>
@@ -273,7 +275,7 @@ vars.put(
           </ModuleController>
           <hashTree/>
         </hashTree>
-        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="Throughput Controller - Search">
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="Throughput Controller - Search" enabled="true">
           <intProp name="ThroughputController.style">1</intProp>
           <boolProp name="ThroughputController.perThread">false</boolProp>
           <intProp name="ThroughputController.maxThroughput">1</intProp>
@@ -294,7 +296,7 @@ vars.put(
           </ModuleController>
           <hashTree/>
         </hashTree>
-        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="Throughput Controller - Add to cart">
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="Throughput Controller - Add to cart" enabled="true">
           <intProp name="ThroughputController.style">1</intProp>
           <boolProp name="ThroughputController.perThread">false</boolProp>
           <intProp name="ThroughputController.maxThroughput">1</intProp>
@@ -481,7 +483,7 @@ vars.put(
         </ResultCollector>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group - Login" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group - Login">
         <stringProp name="ThreadGroup.num_threads">${__groovy(Math.max(1\, (Integer.parseInt(&apos;${THREADS}&apos;) * 0.40) as Integer))}</stringProp>
         <stringProp name="ThreadGroup.ramp_time">${RAMP_UP}</stringProp>
         <stringProp name="ThreadGroup.duration">${DURATION}</stringProp>
@@ -884,7 +886,7 @@ vars.put(
               </HeaderManager>
               <hashTree/>
             </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[GET] View  cart" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="[GET] View cart" enabled="true">
               <stringProp name="HTTPSampler.path">${LANG}/cart?action=show</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -1042,7 +1044,7 @@ vars.put(
               <connectTime>true</connectTime>
             </value>
           </objProp>
-          <stringProp name="filename"></stringProp>
+          <stringProp name="filename">C:\Users\Hori\Desktop\performance\teme\scripts\results\27_08_2026_run_baseline\run_1_baseline\test_result_polished.jtl</stringProp>
         </ResultCollector>
         <hashTree/>
       </hashTree>
@@ -1191,10 +1193,10 @@ vars.put(
             <connectTime>true</connectTime>
           </value>
         </objProp>
-        <stringProp name="filename">C:\Users\Hori\Desktop\performance\teme\scripts\results\24_08_2026_run\LOAD_50_users_300_RampUp_3900_Duration_20260824_165301_jmeter_generated.jtl</stringProp>
+        <stringProp name="filename">C:\Users\Hori\Desktop\performance\teme\scripts\results\26_08_2026_run\run_1_200_threads\test_result_polished.jtl</stringProp>
       </ResultCollector>
       <hashTree/>
-      <ResultCollector guiclass="SimpleDataWriter" testclass="ResultCollector" testname="Simple Data Writer" enabled="true">
+      <ResultCollector guiclass="SimpleDataWriter" testclass="ResultCollector" testname="Simple Data Writer">
         <boolProp name="ResultCollector.error_logging">false</boolProp>
         <objProp>
           <name>saveConfig</name>
@@ -1230,7 +1232,7 @@ vars.put(
             <connectTime>true</connectTime>
           </value>
         </objProp>
-        <stringProp name="filename">C:\Users\Hori\Desktop\performance\teme\scripts\results\27_08_2026_run\test_result.jtl</stringProp>
+        <stringProp name="filename">C:\Users\Hori\Desktop\performance\teme\scripts\results\02_09_2026_run\jmeter_report.jtl</stringProp>
       </ResultCollector>
       <hashTree/>
       <com.ubikloadpack.jmeter.ulp.observability.listener.ULPObservabilityListener guiclass="com.ubikloadpack.jmeter.ulp.observability.listener.gui.ULPObservabilityGui" testclass="com.ubikloadpack.jmeter.ulp.observability.listener.ULPObservabilityListener" testname="UbikLoadPack Observability Plugin" enabled="true">

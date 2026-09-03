@@ -1,0 +1,28 @@
+!!! Start with 2-4 gb and increase from there
+
+
+Windows command line:
+
+set HEAP=-Xms2g -Xmx4g && jmeter -n -t test.jmx -l results.jtl
+
+
+Powershell:
+
+$env:HEAP="-Xms2g -Xmx4g"; .\jmeter.bat -n -t C:\path\to\test.jmx -l C:\path\to\results.jtl
+
+
+Linux:
+
+HEAP="-Xms2g -Xmx4g" ./jmeter -n -t /path/to/test.jmx -l /path/to/results.jtl
+
+
+Example with html report:
+set HEAP=-Xms4g -Xmx8g && jmeter -n -t C:\tests\prestashop.jmx -l C:\results\results.jtl -e -o C:\results\report
+$env:HEAP="-Xms4g -Xmx8g"; .\jmeter.bat -n -t C:\tests\prestashop.jmx -l C:\results\results.jtl -e -o C:\results\report
+HEAP="-Xms4g -Xmx8g" ./jmeter -n -t ~/tests/prestashop.jmx -l ~/results/results.jtl -e -o ~/results/report
+
+
+Also add the following to increaste the MaxMetaspaceSize:
+
+-XX:MaxMetaspaceSize=256m
+

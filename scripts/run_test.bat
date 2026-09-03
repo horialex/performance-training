@@ -21,9 +21,9 @@ set "PORT=80"
 set "PROTOCOL=http"
 set "LANG=en"
 
-set "THREADS=1"
-set "RAMP_UP=1"
-set "DURATION=1200"
+set "THREADS=50"
+set "RAMP_UP=300"
+set "DURATION=3600"
 
 set "WAIT_TIME_SHORT=1000"
 set "WAIT_TIME_MID=3000"
@@ -33,7 +33,7 @@ REM ------------------------------------------------------------
 REM Results directory
 REM ------------------------------------------------------------
 
-set "RUN_NAME=27_08_2026_run"
+set "RUN_NAME=02_09_2026_run"
 set "RESULTS_DIR=results\%RUN_NAME%"
 
 if not exist "%RESULTS_DIR%" mkdir "%RESULTS_DIR%"
